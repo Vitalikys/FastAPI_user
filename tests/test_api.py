@@ -1,11 +1,8 @@
 # https://stackoverflow.com/questions/67255653/how-to-set-up-and-tear-down-a-database-between-tests-in-fastapi
-import os
 from unittest import TestCase
-
-import pytest
 from fastapi.testclient import TestClient
 
-from main import app as web_app
+from app.main import app as web_app
 
 
 class APITEstCase(TestCase):
@@ -29,12 +26,13 @@ class APITEstCase(TestCase):
         """
         user_data = {
             "user": {
-                "email": "usr_test_FI1@mail.ua",
+                "email": "usr_test12@mail.ua",
                 "password": "1111",
                 "firstname": "from schemas"}}
         response = self.client.post('/create_user', json=user_data)
         created_usr = response.json()
-        self.assertEqual(created_usr['email'], "usr_test_FI1@mail.ua")
+        print(created_usr)
+        self.assertEqual(created_usr['email'], "usr_test12@mail.ua")
         # self.assertEqual(response.json(), {'detail': 'Email already registered '})
         # self.assertEqual(response.status_code, 200)
 

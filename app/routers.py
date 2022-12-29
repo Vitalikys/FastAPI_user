@@ -32,7 +32,9 @@ def create_new_user(user: UserCreate = Body(..., embed=True),
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    return {'new_user id': new_user.id, 'New user email Here:': new_user.email}
+    return {'new_user id': new_user.id,
+            'New user email Here:': new_user.email,
+            'email': new_user.email}
 
 
 @router.get("/user/{user_id}", response_model=UserBase)
