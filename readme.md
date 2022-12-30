@@ -41,4 +41,6 @@ EMAIL VALIDATOR :
 in TESTS
 треба видаляти базу
  os.remove('sql_app.db')
+RUN tests: $ python -m pytest -v -s 
+-s : print any data from print(me)
  

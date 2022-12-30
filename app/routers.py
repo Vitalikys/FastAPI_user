@@ -2,6 +2,7 @@
 import uuid
 
 from fastapi import APIRouter, Depends, Body, HTTPException
+from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 from starlette import status
 
@@ -29,6 +30,8 @@ def create_new_user(user: UserCreate = Body(..., embed=True),
                     password=get_password_hash(user.password),
                     firstname=user.firstname,
                     age=user.age)
+    # update_data=user.dict(exclude_unset=True)
+    # new_user = User(**update_data)
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
@@ -37,12 +40,63 @@ def create_new_user(user: UserCreate = Body(..., embed=True),
             'email': new_user.email}
 
 
+@router.patch('/user/{user_id}', name='Partial update user')
+def update_user(user: UserOptional,
+                user_id: int,
+                db: Session = Depends(connect_db)) -> User:
+    user_from_db = db.query(User).filter(User.id == user_id).one_or_none()
+    if user_from_db is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    try:
+        update_data = user.dict(exclude_unset=True)  # get only fields given to update
+        print('update_data', update_data)
+        # if 'email' in update_data:
+        #     user_from_db.email = update_data['email']
+        # if 'firstname' in update_data:
+        #     user_from_db.firstname = update_data['firstname']
+        # if 'password' in update_data.keys():
+        #     user_from_db.password = update_data['password']
+        # if 'age' in update_data.keys():
+        #     user_from_db.age = update_data['age']
+
+        # user_from_db.save()
+        print('user_from_db---', user_from_db.__dict__)
+        # updated_user = user_from_db.copy(update=update_data)
+        user_from_db.__dict__.update(update_data)
+        # user_from_db.update(update_data) # 'User' object has no attribute 'update'
+        # user_from_db.save()
+        print('updated_user = ', user_from_db.__dict__)
+        db.add(user_from_db)
+        db.commit()
+        db.refresh(user_from_db)
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        print('=================  got error:')
+        print(str(e))
+    return user_from_db
+
+
+"""def update(
+        self, db_session: Session, *, db_obj: ModelType, obj_in: UpdateSchemaType
+    ) -> ModelType:
+        obj_data = jsonable_encoder(db_obj)
+        update_data = obj_in.dict(skip_defaults=True)
+        for field in obj_data:
+            if field in update_data:
+                setattr(db_obj, field, update_data[field])
+        db_session.add(db_obj)
+        db_session.commit()
+        db_session.refresh(db_obj)
+        return db_obj"""
+
+
 @router.get("/user/{user_id}", response_model=UserBase)
-async def read_user(user_id: int, db: Session = Depends(connect_db)):
+async def read_user(user_id: int, db: Session = Depends(connect_db)) -> User:
     db_user = db.query(User).filter(User.id == user_id).one_or_none()
-    print(db_user.__dict__)
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
+    print(db_user.__dict__)
     return db_user
 
 
