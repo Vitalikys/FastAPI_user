@@ -11,7 +11,9 @@ SessionLocal = sessionmaker(
 
 Base = declarative_base()
 
-
+# print('Hello from database Base')
+# print(Base.metadata)
+# print(Base.__dict__)
 # Dependency
 def connect_db():
     db = SessionLocal()
@@ -20,3 +22,9 @@ def connect_db():
         db.commit()
     finally:
         db.close()
+
+# async def init_db():
+#     """https://habr.com/ru/post/580866/ """
+#     async with engine.begin() as conn:
+#         # await conn.run_sync(SQLModel.metadata.drop_all)
+#         await conn.run_sync(SQLModel.metadata.create_all)

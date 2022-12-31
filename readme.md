@@ -1,4 +1,5 @@
 https://fastapi.tiangolo.com/deployment/docker/
+https://habr.com/ru/post/580866/
 #### Build your FastAPI image:
 docker build -t fastapi_users_image .
 
@@ -43,4 +44,11 @@ in TESTS
  os.remove('sql_app.db')
 RUN tests: $ python -m pytest -v -s 
 -s : print any data from print(me)
+
+
+Alembic 
+https://alembic.sqlalchemy.org/en/latest/tutorial.html
+$ pip install alembic
+$ alembic init alembic
+
  
