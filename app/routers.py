@@ -15,7 +15,7 @@ router = APIRouter()
 
 
 @router.get('/all_users', name='users:list', response_model=list[UserBase])
-async def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(connect_db)):
+def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(connect_db)):
     users = db.query(User).all()
     return users
 
@@ -97,7 +97,7 @@ def update_user(user: UserOptional,
 @router.get("/user/{user_id}",
             response_model=UserCreate,
             response_model_exclude={"password"})  # скриваємо такі поля
-async def read_user(user_id: int, db: Session = Depends(connect_db)) -> User:
+def read_user(user_id: int, db: Session = Depends(connect_db)) -> User:
     db_user = db.query(User).filter(User.id == user_id).one_or_none()
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
@@ -106,7 +106,7 @@ async def read_user(user_id: int, db: Session = Depends(connect_db)) -> User:
 
 
 @router.get('/items', name='items list')
-async def all_items(skip: int = 0, limit: int = 100, db: Session = Depends(connect_db)):
+def all_items(skip: int = 0, limit: int = 100, db: Session = Depends(connect_db)):
     all_item = db.query(Item).all()
     return all_item
 
