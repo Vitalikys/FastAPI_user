@@ -4,10 +4,25 @@ from pydantic import BaseModel, Field, EmailStr
 from pydantic import validator
 
 
+class ItemBase(BaseModel):
+    title: str  # | None = Field(default='title', min_length=3)
+    description: str
+    count: int = Field(ge=0)
+
+    @validator('count')
+    def check_count(cls, value):
+        if value < 0 or value > 100:
+            raise ValueError('Count items should be between 0...100')
+
+
+# class ItemCreate(ItemBase):
+#     owner_id: int
+
 class UserBase(BaseModel):
     firstname: str = Field(default='enter firstname',
                            min_length=3, title='description for FirstName')
     email: EmailStr
+    # items: list[ItemBase] = []
 
     class Config:
         orm_mode = True
@@ -33,17 +48,3 @@ class UserOptional(UserCreate):
     email: Optional[EmailStr] = None
     firstname: Optional[str] = None
     age: Optional[int] = None
-
-
-class ItemBase(BaseModel):
-    title: str  # | None = Field(default='title', min_length=3)
-    description: str
-    count: int = Field(ge=0)
-
-    @validator('count')
-    def check_count(cls, value):
-        if value < 0 or value > 100:
-            raise ValueError('Count items should be between 0...100')
-
-# class ItemCreate(ItemBase):
-#     owner_id: int

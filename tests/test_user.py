@@ -26,6 +26,10 @@ def test_create_user():
     assert get_user_data['email'] == payload['user']['email']
     print('get_user_data: ', get_user_data)
 
+    # delete last created user
+    delete_user_response = requests.delete(ENDPOINT + f'/user_delete/{new_user_id}')
+    assert delete_user_response.status_code == 200
+
 
 def new_user_payload():
     return {

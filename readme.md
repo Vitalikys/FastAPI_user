@@ -19,7 +19,10 @@ https://fastapi.tiangolo.com/tutorial/sql-databases/
 https://fastapi-crudrouter.awtkns.com/backends/ormar
 ## How to run
 
-1. uvicorn main:app --reload --port 5000
+1. runserver
+```shell
+$ uvicorn main:app --reload --port 5000
+```
 2. http://127.0.0.1:8000/docs
 3. alembic upgrade head  //#migrations 
 
@@ -51,4 +54,11 @@ https://alembic.sqlalchemy.org/en/latest/tutorial.html
 $ pip install alembic
 $ alembic init alembic
 
- 
+ - [x] #739
+ - [ ] https://github.com/octo-org/octo-repo/issues/740
+ - [ ] \(Optional) Add delight to the experience when all tasks are complete :tada:
+
+run test for create, get, delete user
+```shell
+$ pytest ./tests/test_user.py -v -s
+```

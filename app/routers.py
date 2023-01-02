@@ -14,7 +14,8 @@ from app.schemas import *
 router = APIRouter()
 
 
-@router.get('/all_users', name='users:list', response_model=list[UserBase])
+@router.get('/all_users', name='users:list', response_model=list[UserBase],
+            response_model_exclude={'items'})
 def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(connect_db)):
     users = db.query(User).all()
     return users
@@ -43,10 +44,19 @@ def create_new_user(user: UserCreate = Body(..., embed=True),
             'email': new_user.email}
 
 
+@router.put('/user_/{user_id}', name='Full update user')
+def update_user_put(user: UserOptional,
+                    user_id: int,
+                    db: Session = Depends(connect_db)) -> dict:
+    db.query(User).filter(User.id == user_id).update(user.__dict__)
+    return {'message': 'The data is updated'}
+
+
 @router.patch('/user/{user_id}', name='Partial update user')
 def update_user(user: UserOptional,
                 user_id: int,
                 db: Session = Depends(connect_db)) -> User:
+    """ Not working correctly """
     user_from_db = db.query(User).filter(User.id == user_id).one_or_none()
     if user_from_db is None:
         raise HTTPException(status_code=404, detail="User not found")
@@ -156,7 +166,7 @@ def get_user_by_token(token: AuthToken = Depends(check_auth_token), db: Session 
     return {'id': user.id, 'email': user.email}
 
 
-@router.delete('/user_delete/{user_id}}')
+@router.delete('/user_delete/{user_id}')
 def delete_user(user_id: int, db: Session = Depends(connect_db)):
     user_to_delete = db.query(User).filter(User.id == user_id).one_or_none()
     print('DELETING :', user_to_delete)
