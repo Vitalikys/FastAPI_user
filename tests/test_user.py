@@ -1,8 +1,6 @@
 # https://www.youtube.com/watch?v=7dgQRVqF1N0&ab_channel=pixegami
 import requests
-
-# ENDPOINT = 'http://78.27.202.55:8003'
-ENDPOINT = 'http://127.0.0.1:8000'
+from app.config import ENDPOINT
 
 
 def test_can_call_endpoint():

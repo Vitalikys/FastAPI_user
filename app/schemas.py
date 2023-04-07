@@ -1,28 +1,24 @@
 from typing import Optional
 
-from pydantic import BaseModel, Field, EmailStr
-from pydantic import validator
+from pydantic import BaseModel, Field, EmailStr, validator
 
 
 class ItemBase(BaseModel):
-    title: str  # | None = Field(default='title', min_length=3)
+    title: str
     description: str
-    count: int = Field(ge=0)
+    count: Optional[int] = Field(default=None, ge=0)
 
     @validator('count')
     def check_count(cls, value):
         if value < 0 or value > 100:
             raise ValueError('Count items should be between 0...100')
+        return value
 
-
-# class ItemCreate(ItemBase):
-#     owner_id: int
 
 class UserBase(BaseModel):
     firstname: str = Field(default='enter firstname',
                            min_length=3, title='description for FirstName')
     email: EmailStr
-    # items: list[ItemBase] = []
 
     class Config:
         orm_mode = True

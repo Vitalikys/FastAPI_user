@@ -1,9 +1,6 @@
 #  виносимо константу для хешування паролю в файл ***.env
-# from app.config import SECRET_KEY
-# SECRET_KEY = config('SECRET_KEY', config)
 import hashlib
-
-SECRET_KEY = 'secret'
+from app.config import SECRET_KEY
 
 
 def get_password_hash(password: str) -> str:

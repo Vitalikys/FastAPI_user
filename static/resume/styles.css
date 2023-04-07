@@ -1,0 +1,242 @@
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    background-color: #faf7fa;
+    display: block;
+}
+
+/* main styles  flex-page on center  */
+.main {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 1200px;
+    /* height: 1319px; */
+    margin: 0 auto;
+    justify-content:start
+}
+
+.main-content{
+    box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff; 
+    padding: 105px 90px;
+    /* margin-right: 30px; */
+}
+/* h3{    color: blueviolet;} */
+
+
+.about {
+    margin-bottom: 40px;
+}
+
+.about-position{
+    color: #000000;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 20px;
+}
+.about-name{
+    color: #000000;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 45px;
+    line-height: 55px;
+}
+.about-description{
+    color: #595959;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    width: 400px;
+}
+
+.projects{
+    /* background-color: rgb(255, 211, 211); */
+    margin-bottom: 50px; 
+}
+.project-item-li{
+    color: #000000;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 24px;
+}
+.project-span,
+.project-link{
+    color: #595959;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+}
+.project-link{
+    margin-left: 10px;
+}
+.project-bracket{
+    color: #000000;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 24px;
+}
+.title{
+    color: #000000;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 27px;
+    line-height: 27px;
+    margin-bottom: 6px;
+}
+.work{
+    margin-top: 51px;
+    /* margin-left: 88px; */
+    border-radius: 20px;
+}
+
+h4{
+    color: #000000;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+}
+.organization{
+    color: #fb6d3a;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.period-work{
+    color: #a8a8a8;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    margin-bottom: 8px;
+}
+.line{
+    color: black;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    margin-bottom: 8px;
+} 
+/* !!!!!  its the  SAME
+ ..work-list-item  for <li> */
+.work li{
+    color: #595959;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+
+.education{
+    /* background-color: gainsboro; */
+    /* padding: 10px ; */
+    /* margin-left: 88px; */
+    /* border: 2px solid rgb(228, 150, 150);
+    border-radius: 20px; */
+}
+
+/* aside {display: flex;} */
+
+.sidebar {
+    background-color: #1E2939;
+    /* height: 1319px; */
+    width: 370px;
+    padding-top: 40px;
+}
+
+/* img can use instead of class='image' */
+img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    margin-bottom: 50px;
+    width: 260px;
+    box-shadow: 5px 5px 5px rgb(233, 229, 229);
+}
+
+.contacts,
+.tech-skills,
+.soft-skills{
+    margin-left: 40px;
+    margin-bottom: 50px;
+    color: #ffff;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.sidebar-title{
+    color: #ffff;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 27px;
+    margin-bottom: 10px;
+}
+
+.contact-type{
+    color: #ffff;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 24px;
+    margin-right: 9px;
+}
+/* <a href=  Different styles of Links:  */
+.contact-link{
+    color: #adc5e7;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    text-decoration: none;
+}
+
+.soft-skills-list,
+.tech-skills-list{
+    color: #fb6d3a
+}
+
+/* 
+ol>li :before{
+    content: '👉';
+} */
+ul,ol{
+    margin-left: -20px;
+    /* list-style-type: '👉'; */
+}
+
+aside span {
+    color: #ffff;
+}
+
+/* img signature figcaption */
+/* figcaption{
+    font-size: large;
+    color: #fb6d3a;
+    text-align: center;
+} */
+
+
+/* .work > ul ::marker {  color: #28b632;} */
+/* span{  color: #fb6d3a;} */
+
+/* mouse over link */
+a:hover{
+    text-decoration: underline;
+    color:red;
+}
+
+/* visited link */
+a:visited{
+    color: green;
+}
+
+/* a:active{ color: blue;}*/

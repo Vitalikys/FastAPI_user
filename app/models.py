@@ -16,6 +16,9 @@ class User(Base):
     age = Column(Integer, default=18)
     items = relationship("Item", back_populates="owner")
 
+    def __repr__(self):
+        return f"<User(id={self.id}, email={self.email}, firstname={self.firstname})>"
+
 
 class Item(Base):
     __tablename__ = "items"
@@ -23,7 +26,7 @@ class Item(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String, index=True)
     description = Column(String, index=True)
-    count = Column(Integer, default=0)
+    count = Column(Integer)
     owner_id = Column(Integer, ForeignKey("users.id"))
 
     owner = relationship("User", back_populates="items")

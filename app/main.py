@@ -1,33 +1,22 @@
-from typing import Union
-
 from fastapi import FastAPI
-from sqlalchemy.orm import declarative_base
+from starlette.staticfiles import StaticFiles
 
 from app.routers import router
-from app.database import engine, connect_db
-from app.database import Base
+from app.routers_html import router as html_router
+from app.database import engine, Base
 
 Base.metadata.create_all(bind=engine)
 
-# def get_application() -> FastAPI:
-#     application = FastAPI()
-#     application.include_router(router)
-#     return application
 app = FastAPI(
     title="My first FastAPI project",
     description="Author: Vitalii K.",
     version='0.1'
 )
-app.include_router(router)
-
-# app = get_application()
+app.mount("/static", StaticFiles(directory="static"), name="static")
+app.include_router(router, tags=['USER part'])
+app.include_router(html_router, tags=['Html pages'])
 
 
 @app.get("/")
 def read_root():
     return {'Try': 'go to /docs for more documentation .'}
-
-
-# @app.on_event("startup")
-# async def on_startup():
-#     await connect_db()
